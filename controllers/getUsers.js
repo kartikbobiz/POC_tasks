@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Roles = require("../models/roles.model")
 const { Apiresponse } = require("../utils/apiResponse");
 
 const getUserByRole = async (role) => {
@@ -6,7 +7,7 @@ const getUserByRole = async (role) => {
       const users = await Roles.find({ name: `${role}` });
       let role_id;
       for await(const user of users) {
-          role_id = await Users.find({ role_id: user._id });
+          role_id = await User.find({ role_id: user._id });
           return role_id;
       }
       return role_id
